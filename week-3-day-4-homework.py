@@ -30,20 +30,19 @@ Add a count for the number of valid and invalid records.
 import re
 
 with open('./user_records.txt') as f:
-    data = f.read()
+    data = f.readlines()
 
-user_info = re.compile(r'([A-Z][a-z]+ [A-Z][a-z]+), ([0-9]{2}), ([A-Za-z][A-Za-z ]*)$')
+user_info = re.compile(r'([A-Z][a-z]+ [A-Z][a-z]+), ([0-9]{1,3}), ([A-Za-z][A-Za-z ]*)$')
 
 def extracted_info(user_records, user_info):
     valid_records = 0
     invalid_records = 0
     
-    data_lines = user_records.split('\n')
     print('\n')
     print('='*25)
-    print('     User Data')
+    print('       User Data')
     print('='*25)
-    for line in data_lines:
+    for line in user_records:
         match = re.match(user_info, line)
         if match:
             age = match.group(2)
